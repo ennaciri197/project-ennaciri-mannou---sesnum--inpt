@@ -1,95 +1,65 @@
-# PROJECT-ENNACIRI-MANNOU---SESNUM--INPT
-# Temperature Dashboard
+# Temperature Dashboard: Real-Time IoT Monitoring System
 
-## Project Overview 
-
-The Temperature Dashboard is a real-time monitoring system that displays the evolution of temperature in a room using a web interface.
-
-A temperature sensor continuously measures the room temperature and sends the data to a Raspberry Pi acting as a server. The server processes, stores, and organizes the data in a database, allowing the system to visualize temperature changes over time using graphs.
+**Course Assignment** **Team Members:** ENNACIRI ABDERRAHIM & MAROUAN MANNOU
 
 ---
 
-## System Architecture
+## 📝 Project Overview
+The **Temperature Dashboard** is a real-time monitoring system designed to display and analyze the evolution of temperature and humidity in a room. 
 
-The system is composed of three main parts:
+A DHT11 sensor continuously measures environmental data and sends it to a Raspberry Pi server. The system processes, stores, and organizes this data in a relational database, allowing for structured visualization through a web-based dashboard with real-time graphs.
 
-### Temperature Sensor (IoT device)
-- Continuously measures room temperature  
-- Sends data to the Raspberry Pi  
+## 🏗️ System Architecture
+The system follows a modular, containerized architecture composed of three main layers:
 
-### Raspberry Pi (Server)
-- Receives sensor data  
-- Stores values in a database  
-- Processes data for visualization  
+1.  **IoT Sensing Layer (DHT11):** * Continuously measures room temperature and humidity.
+    * Communicates via GPIO pins to the Raspberry Pi.
+2.  **Server & Storage Layer (Raspberry Pi / MariaDB):** * **Python Backend:** Handles raw data acquisition and error correction.
+    * **MariaDB Database:** Stores values for historical tracking and analysis.
+3.  **Web Dashboard Layer:** * **PHP/Apache:** Bridges the database to the frontend.
+    * **JavaScript/Chart.js:** Displays real-time data and historical evolution using interactive graphs.
 
-### Web Dashboard
-- Displays real-time temperature  
-- Shows historical data using graphs  
-- Provides organized visualization of temperature evolution  
+## 🚀 Objective
+The goal of this project is to build a robust IoT monitoring system that allows users to:
+* **Monitor** room temperature and humidity in real time.
+* **Analyze** historical environmental data.
+* **Visualize** trends through dynamic, moving-window graphs.
 
----
+## 🛠️ Technologies Used
+* **Hardware:** Raspberry Pi 3B, DHT11 Sensor.
+* **DevOps:** Docker & Docker Compose (Containerization).
+* **Backend:** Python 3.11 (CircuitPython/Blinka), PHP 8.2.
+* **Database:** MariaDB (optimized for 32-bit ARMv7).
+* **Frontend:** HTML5, CSS3, JavaScript (jQuery), Chart.js.
 
-## Features
+## 🔄 Data Flow
+1.  **Sensing:** The DHT11 sensor reads ambient data.
+2.  **Transmission:** Python script captures data and handles connection retries.
+3.  **Storage:** Data is structured and saved in the MariaDB `SensorData` table.
+4.  **Retrieval:** The Web Dashboard requests the latest records via AJAX.
+5.  **Visualization:** Charts are generated and updated every 5 seconds.
 
-- Real-time temperature display  
-- Continuous data collection  
-- Data storage in a database  
-- Graphical visualization of temperature evolution  
-- Clean and organized dashboard interface  
-- Historical temperature tracking  
+## ✨ Features
+* **Real-time display:** Immediate visualization of current readings.
+* **Continuous collection:** Automated data gathering without manual intervention.
+* **Historical tracking:** View data evolution over time.
+* **Clean Interface:** Organized and responsive dashboard for easy observation.
 
----
-
-## Important Note
-
-This project is monitoring-only:
-
-The web interface does not control any device.  
-It is only used to observe and analyze temperature evolution in a structured and visual way.
-
----
-
-## Technologies Used (Planned)
-
-- Raspberry Pi  
-- Temperature sensor (DHT11)  
-- Python (backend)  
-- SQLite / MySQL (database)  
-- HTML / CSS / JavaScript (frontend)  
-- Chart.js (graphs)
+## ⚠️ Important Note
+This project is **monitoring-only**. The web interface is used solely to observe and analyze temperature evolution in a structured way; it does not control external hardware or cooling/heating devices.
 
 ---
 
-## Data Flow
-
-1. Temperature sensor reads data  
-2. Data is sent to Raspberry Pi  
-3. Server stores data in database  
-4. Web dashboard requests data  
-5. Graphs are generated and displayed  
-
----
-
-## Objective
-
-The goal of this project is to build a simple IoT monitoring system that allows users to:
-
-- Monitor room temperature in real time  
-- Analyze historical temperature data  
-- Visualize data using graphs  
-
----
-
-## Team Members
-
-- ENNACIRI ABDERRAHIM  
-- MAROUAN MANNOU 
-
----
-
-## Future Improvements
-
-- Add humidity monitoring  
-- Add alert system for extreme temperatures  
-- Improve graph interactivity    
- 
+## 📂 Project Structure
+```text
+dht_dashboard/
+├── docker-compose.yml         # Container orchestration
+├── db_init/
+│   └── init.sql               # Database schema
+├── sensor/
+│   ├── Dockerfile             # Hardware drivers & Python environment
+│   └── collect.py             # Data acquisition script
+└── web_root/
+    ├── Dockerfile             # Web server & PHP extensions
+    ├── index.html             # Chart.js frontend
+    └── data.php               # Database bridge
