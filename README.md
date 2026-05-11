@@ -1,4 +1,4 @@
-# PROJECT-ENNACIRI-MANNOU---SESNUM--INP
+# PROJECT-ENNACIRI-MANNOU---SESNUM--INPT
 # Temperature Dashboard
 
 ## Project Overview
