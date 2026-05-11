@@ -1,7 +1,7 @@
 # PROJECT-ENNACIRI-MANNOU---SESNUM--INPT
 # Temperature Dashboard
 
-## Project Overview
+## Project Overview 
 
 The Temperature Dashboard is a real-time monitoring system that displays the evolution of temperature in a room using a web interface.
 
